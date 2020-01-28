@@ -10,3 +10,15 @@ export interface CharacterVM {
   image: string;
 }
 
+export const createEmptyCharacter = (): CharacterVM => ({
+  id: -1,
+  name: '',
+  gender: '',
+  image: '',
+  location: '',
+  origin: '',
+  species: '',
+  status: '',
+  type: ''
+});
+

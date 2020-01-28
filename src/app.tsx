@@ -1,36 +1,60 @@
 import * as React from "react";
 import { getCharacters } from './model/character.api'
-import { CharacterVM } from './model/character.vm'
+import { CharacterVM, createEmptyCharacter } from './model/character.vm'
 import { charactersCollectionApiToVM } from './model/character.mapper';
-import Logo from './assets/img/rick-morty.png'
+import { Header } from './layout/header';
+import { CardCharacter } from './character/card-character';
+import {InfoCharacter} from './character/info-character';
+import './index.css'
+
 export const App: React.FunctionComponent = () => {
 
   const [characters, setCharacters] = React.useState<CharacterVM[]>([]);
   const [filter, setFilter] = React.useState<string>('');
-  const [nextPage, setNextPage] = React.useState<string>('');
-  const [prevPage, setPrevPage] = React.useState<string>('');
+  const [characterSelected, setCharacterSelected] = React.useState<CharacterVM>(createEmptyCharacter())
+  const [showModal, setShowModal] = React.useState(false);
 
 
   React.useEffect(() => {
-    getCharacters(filter).then(({ info, results }) => {
-      setCharacters(charactersCollectionApiToVM(results))
-      setNextPage(info.next);
-      setPrevPage(info.prev);
-    })
+    getCharacters(filter)
+      .then(({ info, results }) => {
+        setCharacters(charactersCollectionApiToVM(results))
+      })
+      .catch(err => {
+        setCharacters([])
+      })
   }, [filter])
 
- 
+
+  const handleSeeInfo = (character: CharacterVM) => {
+    setShowModal(true)
+    setCharacterSelected(character);
+  }
+
 
   return (
-    <>
-      <img src=""/>
-      <h2>My app</h2>
-      <input onChange={e => setFilter(e.target.value)} />
-      <p>Filter:{filter}</p>
+    <div className="container">
+      <Header />
+      <input
+        onChange={e => setFilter(e.target.value)}
+        placeholder="Character's name"
+        className="input-search" />
+      <div className="cards-container">
+        {characters[0] ? characters.map(character => (
+          <CardCharacter
+            key={character.id}
+            character={character}
+            onSeeInfo={handleSeeInfo}
+          >
+            {character.name}
+          </CardCharacter>
+        ))
+          :
+          <p>Not characters with {filter}</p>
+        }
+      </div>
+      {showModal && <InfoCharacter character={characterSelected} onClose={() => setShowModal(false)}/>}
+    </div>
 
-      {characters.map(character => (
-        <h5 key={character.id}>{character.name}</h5>
-      ))}
-    </>
   )
 };
