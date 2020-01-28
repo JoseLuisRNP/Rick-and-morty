@@ -32,8 +32,8 @@ interface ApiResult{
 
 
 
-export const getCharacters = (name = ''): Promise<ApiResult> => (
-  fetch(`https://rickandmortyapi.com/api/character/?name=${name}`)
+export const getCharacters = (name = '', url = `https://rickandmortyapi.com/api/character/?name=${name}`): Promise<ApiResult> => (
+  fetch(url)
     .then(res => res.json())
     .then(data => data)
   )

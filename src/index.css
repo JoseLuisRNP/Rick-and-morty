@@ -91,7 +91,7 @@
   margin: 1rem;
 }
 
-.card--btn {
+.btn {
   margin: 1.5rem;
   height: 50px;
   padding: 16px 32px;
@@ -100,9 +100,17 @@
   border-radius: 25px;
   color: #fff;
   text-align: center;
-  background-color: #f8b400;
+  
   box-shadow: 0 11px 36px 0 rgba(70,89,138,.25);
   border: none;
+}
+
+.btn--primary {
+  background-color: #f8b400;
+}
+
+.btn--secondary {
+  background-color: #2c786c;
 }
 
 .text-center {

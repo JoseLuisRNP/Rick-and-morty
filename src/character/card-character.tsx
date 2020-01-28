@@ -18,7 +18,7 @@ export const CardCharacter: React.FC<Props> = (props) => {
       <div className="text-center">
         <h2 className="card--title">{name}</h2>
         <h3 className="card--subtitle">{species}</h3>
-        <button className="card--btn" onClick={handleSeeInfo}>
+        <button className="btn btn--primary" onClick={handleSeeInfo}>
           See info
         </button>
       </div>
