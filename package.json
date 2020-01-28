@@ -1,6 +1,6 @@
 {
-  "name": "rick-and-morty",
-  "homepage": "http://joseluisrnp.gihub.io/rick-and-morty",
+  "homepage": "https://joseluisrnp.gihub.io/Rick-and-morty",
+  "name": "rick-and-morty",  
   "version": "0.1.0",
   "private": true,
   "dependencies": {
